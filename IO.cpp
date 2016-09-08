@@ -20,11 +20,22 @@ IO::IO(Game &game) {
 }
 
 void IO::drawBoard() {
+    int marginLeft = 50, marginTop = 20;
+
     for(int i = 0; i < BOARD_WIDTH; i++) {
-        for(int j = 0; j < BOARD_HEIGHT; j++) {
-            int getValue = game->getBoardValue(i, j);
-            rect[getValue].setPosition(50 + i * SHAPE_SIZE, 20 + j * SHAPE_SIZE);
-            window.draw(rect[getValue]);
+        for(int j = BLOCK_SIZE - 1; j < BOARD_HEIGHT; j++) {
+            int value = game->getBoardValue(i, j);
+            rect[value].setPosition(marginLeft + i * SHAPE_SIZE, marginTop + j * SHAPE_SIZE);
+            window.draw(rect[value]);
+        }
+    }
+
+    for(int i = 0; i < BLOCK_SIZE; i++) {
+        for(int j = 0; j < BLOCK_SIZE; j++) {
+            int value = game->getBoard().getNextBlock().getValue(i, j);
+            rect[value].setPosition(marginLeft + BOARD_WIDTH * SHAPE_SIZE + i * SHAPE_SIZE,
+                                    marginTop + BOARD_HEIGHT * SHAPE_SIZE / 2 + j * SHAPE_SIZE);
+            window.draw(rect[value]);
         }
     }
 }

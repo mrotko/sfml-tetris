@@ -3,6 +3,7 @@
 Board::Board() {
     board = new int *[BOARD_HEIGHT];
     boardToDisplay = new int *[BOARD_HEIGHT];
+
     for(int i = 0; i < BOARD_HEIGHT; ++i) {
         board[i] = new int[BOARD_WIDTH];
         boardToDisplay[i] = new int[BOARD_WIDTH];
@@ -21,7 +22,7 @@ Board::Board() {
 
 void Board::deleteLine(int y) {
 
-    for(int i = y; i > BLOCK_SIZE; i--)
+    for(int i = y; i >= BLOCK_SIZE; i--)
         for(int j = 0; j < BOARD_WIDTH; j++)
             board[i][j] = board[i - 1][j];
 }
@@ -91,11 +92,9 @@ void Board::setBlock() {
 }
 
 void Board::randBlock(int x, int y) {
-
-
     block = nextBlock;
     nextBlock = Pieces();
-    nextBlock.updateBlock(rand() % 7, 0, x - 3, y);
+    nextBlock.updateBlock(rand() % 7, rand() % 5, x - 3, y);
 }
 
 void Board::updateBoardToDisplay(bool updateBlock) {
@@ -117,4 +116,8 @@ void Board::updateBoardToDisplay(bool updateBlock) {
                 if(boardToDisplay[y + i][x + j] == 0)
                     boardToDisplay[y + i][x + j] = block.getValue(j, i);
     }
+}
+
+Pieces & Board::getNextBlock() {
+    return nextBlock;
 }

@@ -8,7 +8,7 @@
 
 #define SHAPES 9
 #define SHAPE_SIZE 20
-#define HOLD_TIME 700
+#define HOLD_TIME 500
 
 class IO {
 public:

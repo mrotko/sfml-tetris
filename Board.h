@@ -13,8 +13,8 @@ class Board {
     Pieces block, nextBlock;
 public:
     int **boardToDisplay;
-    Board();
 
+    Board();
     void deleteLine(int y);
     int checkLines();
     bool checkEnd();
@@ -24,6 +24,7 @@ public:
     void randBlock(int x, int y);
     void setBlock();
     void updateBoardToDisplay(bool updateBlock = true);
+    Pieces & getNextBlock();
 };
 
 #endif //TETRIS_BOARD_H

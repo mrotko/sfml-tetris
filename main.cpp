@@ -43,6 +43,7 @@ int main() {
             io.clock.restart();
             if(io.game->move(0, 1) == FALSE) {
                 std::cout << "Koniec gry\n";
+                io.window.close();
                 //  wyswietlenie podsumowania, koniec gry
             }
         }

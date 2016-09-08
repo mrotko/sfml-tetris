@@ -18,6 +18,8 @@ public:
     bool move(int x, int y);
     void rotate();
     int getBoardValue(int x, int y);
+    Board &getBoard();
+
 };
 
 #endif //TETRIS_GAME_H

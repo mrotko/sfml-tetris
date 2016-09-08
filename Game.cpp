@@ -43,5 +43,9 @@ int Game::getBoardValue(int x, int y) {
     return board.boardToDisplay[y][x];
 }
 
+Board &Game::getBoard() {
+    return board;
+}
+
 
 
