@@ -35,14 +35,6 @@ bool Game::move(int x, int y) {
     return true;
 }
 
-void Game::rotate() {
-    board.rotateBlock();
-}
-
-int Game::getBoardValue(int x, int y) {
-    return board.boardToDisplay[y][x];
-}
-
 Board &Game::getBoard() {
     return board;
 }

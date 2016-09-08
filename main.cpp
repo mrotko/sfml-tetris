@@ -27,7 +27,7 @@ int main() {
                     else if(event.key.code == sf::Keyboard::Left)
                         game.move(-1, 0);
                     else if(event.key.code == sf::Keyboard::Up)
-                        game.rotate();
+                        game.getBoard().rotateBlock();
                     else if(event.key.code == sf::Keyboard::Down)
                         game.move(0, 1);
                     else if(event.key.code == sf::Keyboard::P)

@@ -16,8 +16,6 @@ public:
     void resume();
     void end();
     bool move(int x, int y);
-    void rotate();
-    int getBoardValue(int x, int y);
     Board &getBoard();
 
 };

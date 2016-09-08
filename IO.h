@@ -5,6 +5,7 @@
 #include "Game.h"
 #include <ctime>
 #include <cstdlib>
+#include <string>
 
 #define SHAPES 9
 #define SHAPE_SIZE 20
@@ -16,6 +17,7 @@ public:
     sf::RectangleShape rect[SHAPES];
     sf::Clock clock;
     sf::Time time;
+    sf::Texture tileTexture;
 
     Game *game;
     IO(Game &game);
