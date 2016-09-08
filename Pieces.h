@@ -1,0 +1,4 @@
+#ifndef TETRIS_PIECES_H
+#define TETRIS_PIECES_H
+
+#endif //TETRIS_PIECES_H
