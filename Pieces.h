@@ -6,7 +6,7 @@ using namespace std;
 
 #define BLOCK_SIZE 5
 class Pieces {
-    int x, y, lastX, lastY;   //  left top corner
+    int x, y;   //  left top corner
     int area[BLOCK_SIZE][BLOCK_SIZE];
     vector <vector <int>> listOfPieces;
 public:

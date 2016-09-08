@@ -3,11 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-#include <random>
+#include <ctime>
+#include <cstdlib>
 
 #define SHAPES 9
 #define SHAPE_SIZE 20
-#define HOLD_TIME 500
+#define HOLD_TIME 700
 
 class IO {
 public:
@@ -18,7 +19,6 @@ public:
 
     Game *game;
     IO(Game &game);
-    void control();
     void drawBoard();
 };
 

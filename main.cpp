@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 #include "IO.h"
+
 using namespace std;
 
 int main() {
@@ -20,10 +21,23 @@ int main() {
                 case sf::Event::GainedFocus:
                     game.resume();
                     break;
+                case sf::Event::KeyPressed:
+                    if(event.key.code == sf::Keyboard::Right)
+                        game.move(1, 0);
+                    else if(event.key.code == sf::Keyboard::Left)
+                        game.move(-1, 0);
+                    else if(event.key.code == sf::Keyboard::Up)
+                        game.rotate();
+                    else if(event.key.code == sf::Keyboard::Down)
+                        game.move(0, 1);
+                    else if(event.key.code == sf::Keyboard::P)
+                        game.pause();
+                    else if(event.key.code == sf::Keyboard::R)
+                        game.resume();
+                    break;
             }
         }
-        io.window.clear();
-        io.control();
+
         io.time = io.clock.getElapsedTime();
         if(io.time.asMilliseconds() > HOLD_TIME) {
             io.clock.restart();
@@ -32,6 +46,7 @@ int main() {
                 //  wyswietlenie podsumowania, koniec gry
             }
         }
+        io.window.clear();
         io.drawBoard();
         io.window.display();
     }

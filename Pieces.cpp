@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Pieces.h"
 
 Pieces::Pieces() {
@@ -12,8 +11,8 @@ Pieces::Pieces() {
 }
 
 void Pieces::rotate() {
-    int n = BLOCK_SIZE;
-    int array[BLOCK_SIZE][BLOCK_SIZE];
+    const int n = BLOCK_SIZE;
+    int array[n][n];
     for(int i = 0; i < n; i++)
         for(int j = 0; j < n; j++)
             array[i][j] = this->area[n - j - 1][i];
@@ -24,8 +23,6 @@ void Pieces::rotate() {
 }
 
 void Pieces::move(int changeX, int changeY) {
-    this->lastX = this->x;
-    this->lastY = this->y;
     this->x += changeX;
     this->y += changeY;
 }
