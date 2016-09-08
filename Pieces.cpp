@@ -24,6 +24,8 @@ void Pieces::rotate() {
 }
 
 void Pieces::move(int changeX, int changeY) {
+    this->lastX = this->x;
+    this->lastY = this->y;
     this->x += changeX;
     this->y += changeY;
 }
@@ -42,11 +44,12 @@ int Pieces::getValue(int x, int y) {
 
 void Pieces::updateBlock(int type, int rotation, int posX, int posY) {
     int i = 0, j = 0, k = 0;
+    int value = type + 2;
     this->x = posX;
     this->y = posY;
     while(i < BLOCK_SIZE) {
         if(listOfPieces[type][k] == BLOCK_SIZE * i + j) {
-            this->area[i][j] = 1;
+            this->area[i][j] = value;
             k++;
         } else this->area[i][j] = 0;
 

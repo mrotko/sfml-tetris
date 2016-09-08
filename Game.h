@@ -3,10 +3,6 @@
 
 #include "Board.h"
 #include <string>
-#include <windows.h>
-#include <ctime>
-#include <conio.h>
-#include <cstdlib>
 
 using namespace std;
 
@@ -14,15 +10,14 @@ class Game {
     string name;
     Board board;
     int lines;
-    static const int HOLD_TIME = 500;
-    time_t startTime, currentTime;
 public:
     Game(string name);
-    void start();
+    void pause();
+    void resume();
     void end();
     void show_result();
-    int getKey();
-    void changePosition(int key);
+    bool move(int x, int y);
+    int getBoardValue(int x, int y);
 };
 
 #endif //TETRIS_GAME_H

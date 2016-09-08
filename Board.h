@@ -14,8 +14,9 @@ class Board {
     int **board;
     Pieces block, nextBlock;
 public:
+    int **boardToDisplay;
     Board();
-    void show();
+//    void show();
     void deleteLine(int y);
     int checkLines();
     bool checkEnd();
@@ -24,6 +25,9 @@ public:
     void rotateBlock();
     void drawBlock(int x, int y);
     void setBlock();
+    void setBlockToDisplay();
+    int value(int x, int y);
+    int updateDisplayBoard();
 };
 
 #endif //TETRIS_BOARD_H

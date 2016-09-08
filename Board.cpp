@@ -2,8 +2,10 @@
 
 Board::Board() {
     board = new int *[BOARD_HEIGHT];
+    boardToDisplay = new int *[BOARD_HEIGHT];
     for(int i = 0; i < BOARD_HEIGHT; ++i) {
         board[i] = new int[BOARD_WIDTH];
+        boardToDisplay[i] = new int[BOARD_WIDTH];
         board[i][0] = board[i][BOARD_WIDTH - 1] = 1;
         for(int j = 1; j < BOARD_WIDTH - 1; ++j)
             board[i][j] = 0;
@@ -11,8 +13,12 @@ Board::Board() {
 
     for(int i = 0; i < BOARD_WIDTH; ++i)
         board[BOARD_HEIGHT - 1][i] = 1;
+
+    drawBlock(BOARD_WIDTH / 2, 0);
+    updateDisplayBoard();
 }
 
+/*
 void Board::show() {
     char c;
 
@@ -42,6 +48,7 @@ void Board::show() {
         cout << endl;
     }
 }
+*/
 
 void Board::deleteLine(int y) {
 
@@ -68,8 +75,8 @@ int Board::checkLines() {
 }
 
 bool Board::checkEnd() {
-    for(int i = 1; i < BOARD_WIDTH-1; i++)
-        if(board[BLOCK_SIZE-1][i])
+    for(int i = 1; i < BOARD_WIDTH - 1; i++)
+        if(board[BLOCK_SIZE - 1][i])
             return true;
     return false;
 }
@@ -77,7 +84,7 @@ bool Board::checkEnd() {
 void Board::move(int x, int y) {
     if(moveIsPossible(x, y)) {
         block.move(x, y);
-        show();
+//        show();
     }
 }
 
@@ -95,10 +102,10 @@ bool Board::moveIsPossible(int xNext, int yNext) {
 void Board::rotateBlock() {
     Pieces b = block;
     block.rotate();
-    if(!moveIsPossible(0,0))
+    if(!moveIsPossible(0, 0))
         block = b;
-    else
-        show();
+//    else
+//        show();
 }
 
 void Board::setBlock() {
@@ -111,10 +118,33 @@ void Board::setBlock() {
                 board[y + i][x + j] = block.getValue(j, i);
 }
 
+void Board::setBlockToDisplay() {
+    int x = block.getX();
+    int y = block.getY();
+
+    for(int i = 0; i < BLOCK_SIZE && i + y < BOARD_HEIGHT; i++)
+        for(int j = 0; j < BLOCK_SIZE && j + x < BOARD_WIDTH; j++)
+            if(boardToDisplay[y + i][x + j] == 0)
+                boardToDisplay[y + i][x + j] = block.getValue(j, i);
+}
+
 void Board::drawBlock(int x, int y) {
     block = nextBlock;
     nextBlock = Pieces();
     nextBlock.updateBlock((rand() % 7), 0, x - 3, y);
 }
 
+int Board::value(int x, int y) {
+    return board[y][x];
+}
+
+int Board::updateDisplayBoard() {
+    for(int i = 0; i < BOARD_HEIGHT; i++) {
+        for(int j = 0; j < BOARD_WIDTH; j++) {
+            boardToDisplay[i][j] = board[i][j];
+        }
+    }
+
+    setBlockToDisplay();
+}
 
