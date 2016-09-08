@@ -22,7 +22,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 
 # Define sources and executable
 set(EXECUTABLE_NAME "Tetris")
-add_executable(${EXECUTABLE_NAME} main.cpp Pieces.cpp Pieces.h)
+add_executable(${EXECUTABLE_NAME} main.cpp Pieces.cpp Pieces.h Board.cpp Board.h Game.cpp Game.h)
 
 
 # Detect and add SFML

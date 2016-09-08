@@ -1,7 +1,12 @@
 #include <iostream>
-
+#include <windows.h>
+#include "Game.h"
+using namespace std;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+
+    Game g("michal");
+    g.start();
+    system("pause");
+
 }
