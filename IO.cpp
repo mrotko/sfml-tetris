@@ -83,25 +83,22 @@ void IO::drawEndGame() {
 
     ss << "Points " << game->getPoints() << std::endl
        << "Level  " << game->getLevel() << std::endl
-       << "Lines   " << game->getLines();
+       << "Lines  " << game->getLines();
 
     sf::Text summary(ss.str(), font, 15);
     summary.setPosition(position);
-    summary.setOutlineThickness(3);
+    summary.setOutlineThickness(2);
     window.draw(summary);
 
-
-
-
     sf::Text endGame("GAME IS OVER!", font, 30);
-    endGame.setOutlineThickness(4);
+    endGame.setOutlineThickness(3);
     position = sf::Vector2f(window.getSize().x / 10, window.getSize().y / 4);
     endGame.setPosition(position);
     window.draw(endGame);
 
     position.y += 40;
     sf::Text record("", font, 12);
-    record.setOutlineThickness(3);
+    record.setOutlineThickness(2);
     record.setPosition(position);
 
     ss.str("");

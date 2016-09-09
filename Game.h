@@ -19,8 +19,9 @@ class Game {
     std::vector <std::vector <std::string>> hallOfFame;
 public:
     bool gamePause;
-    Game(std::string name);
+    Game(std::string name = "");
     void newGame();
+    void setName(std::string name);
     void pause();
     void resume();
     void end();

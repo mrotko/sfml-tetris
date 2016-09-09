@@ -16,6 +16,10 @@ void Game::newGame() {
     loadHallOfFame();
 }
 
+void Game::setName(std::string name) {
+    this->name = name;
+}
+
 void Game::pause() {
     gamePause = true;
 }
@@ -147,7 +151,7 @@ void Game::updateHallOfFame() {
 
     hallOfFame.push_back(tmp);
 
-    int i = hallOfFame.size() - 1;
+    int i = (int) hallOfFame.size() - 1;
     while(i > 0) {
         if(atoi(hallOfFame[i][1].c_str()) > atoi(hallOfFame[i - 1][1].c_str())) {
             tmp = hallOfFame[i - 1];

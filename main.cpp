@@ -1,16 +1,17 @@
 #include "IO.h"
-#include <iostream>
-
-using namespace std;
 
 int main() {
-    Game game("michal");
+    Game game;
     IO io(game);
-
+    bool isNick = false;
+    std::string name = "";
     sf::Vector2i move;
+    sf::Text text("nick: ", io.font, 30);
 
     while(io.window.isOpen()) {
+        io.window.clear(sf::Color(75, 75, 75));
         sf::Event event;
+
         while(io.window.pollEvent(event)) {
             switch(event.type) {
                 case sf::Event::Closed:
@@ -26,11 +27,35 @@ int main() {
                 case sf::Event::KeyPressed:
                     move = io.controlInGame(event);
                     break;
+                case sf::Event::TextEntered:
+                    if(isNick) break;
+                    if(event.key.code == 13) {
+                        if(name != "") {
+                            game.setName(name);
+                            isNick = true;
+                        }
+                        break;
+                    }
+                    if(event.text.unicode == 32) break;
+                    if(event.text.unicode == 8)
+                        name = name.substr(0, name.length() - 1);
+                    else
+                        name += (char) event.text.unicode;
+                    break;
+                default:
+                    break;
             }
         }
+
+        if(!isNick) {
+            text.setString("nick: " + name);
+            io.window.draw(text);
+            io.window.display();
+            continue;
+        }
+
         io.time = io.clock.getElapsedTime();
 
-        io.window.clear(sf::Color(75, 75, 75));
         io.drawBoard();
         io.drawText();
 
@@ -62,8 +87,7 @@ int main() {
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
                     game.newGame();
                 }
-            }
-            else
+            } else
                 io.drawPause();
         }
         io.window.display();
