@@ -78,9 +78,24 @@ void IO::drawPause() {
 }
 
 void IO::drawEndGame() {
+    sf::Vector2f position(window.getSize().x / 10, window.getSize().y / 20);
+    std::ostringstream ss;
+
+    ss << "Points " << game->getPoints() << std::endl
+       << "Level  " << game->getLevel() << std::endl
+       << "Lines   " << game->getLines();
+
+    sf::Text summary(ss.str(), font, 15);
+    summary.setPosition(position);
+    summary.setOutlineThickness(3);
+    window.draw(summary);
+
+
+
+
     sf::Text endGame("GAME IS OVER!", font, 30);
     endGame.setOutlineThickness(4);
-    sf::Vector2f position(window.getSize().x / 10, window.getSize().y / 4);
+    position = sf::Vector2f(window.getSize().x / 10, window.getSize().y / 4);
     endGame.setPosition(position);
     window.draw(endGame);
 
@@ -89,7 +104,7 @@ void IO::drawEndGame() {
     record.setOutlineThickness(3);
     record.setPosition(position);
 
-    std::ostringstream ss;
+    ss.str("");
     std::left(ss);
 
     for(int i = 0; i < game->getHallOfFame().size(); i++) {
@@ -98,8 +113,8 @@ void IO::drawEndGame() {
            << std::setw(15) << game->getHallOfFame()[i][0].substr(0, 10) << " "
            << std::setw(10) << game->getHallOfFame()[i][1].substr(0, 10) << " "
            << game->getHallOfFame()[i][2];
-        record.setString(ss.str());
 
+        record.setString(ss.str());
         window.draw(record);
 
         ss.str("");

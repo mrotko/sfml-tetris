@@ -20,6 +20,7 @@ class Game {
 public:
     bool gamePause;
     Game(std::string name);
+    void newGame();
     void pause();
     void resume();
     void end();

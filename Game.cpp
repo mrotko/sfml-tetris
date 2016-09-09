@@ -3,7 +3,12 @@
 
 Game::Game(std::string name) {
     this->name = name;
+    newGame();
+}
+
+void Game::newGame() {
     gamePause = false;
+    lines = 0; points = 0; level = 1;
     board = Board();
     board.randBlock(BOARD_WIDTH / 2, 0);
     board.randBlock(BOARD_WIDTH / 2, 0);

@@ -57,8 +57,12 @@ int main() {
             }
         } else {
             move = sf::Vector2i(0, 0);
-            if(game.getBoard().getBoardIsFull())
+            if(game.getBoard().getBoardIsFull()) {
                 io.drawEndGame();
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+                    game.newGame();
+                }
+            }
             else
                 io.drawPause();
         }
