@@ -68,3 +68,42 @@ void IO::drawText() {
     window.draw(level);
     window.draw(lines);
 }
+
+void IO::drawPause() {
+    sf::Text pause("PAUSE", font, 50);
+    pause.setOutlineThickness(4);
+    sf::Vector2f position(window.getSize().x / 6, window.getSize().y / 4);
+    pause.setPosition(position);
+    window.draw(pause);
+}
+
+void IO::drawEndGame() {
+    sf::Text endGame("GAME IS OVER!", font, 30);
+    endGame.setOutlineThickness(4);
+    sf::Vector2f position(window.getSize().x / 10, window.getSize().y / 4);
+    endGame.setPosition(position);
+    window.draw(endGame);
+
+    sf::Text record("", font, 30);
+
+}
+
+sf::Vector2i IO::controlInGame(sf::Event &event) {
+    if(event.key.code == sf::Keyboard::Right)
+        return sf::Vector2i(1, 0);
+    else if(event.key.code == sf::Keyboard::Left)
+        return sf::Vector2i(-1, 0);
+    else if(event.key.code == sf::Keyboard::Up)
+        return sf::Vector2i(2, 0);
+    else if(event.key.code == sf::Keyboard::Down)
+        return sf::Vector2i(0, 1);
+    else if(event.key.code == sf::Keyboard::Space) {
+        return sf::Vector2i(3, 0);
+    } else if(event.key.code == sf::Keyboard::P) {
+        if(game->gamePause)
+            game->resume();
+        else
+            game->pause();
+        return sf::Vector2i(0,0);
+    }
+}

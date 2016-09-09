@@ -1,6 +1,7 @@
 #include "Board.h"
 
 Board::Board() {
+    boardIsFull = false;
     board = new int *[BOARD_HEIGHT];
     boardToDisplay = new int *[BOARD_HEIGHT];
 
@@ -46,11 +47,12 @@ int Board::checkLines() {
     return combo;
 }
 
-bool Board::checkEnd() {
+void Board::checkEnd() {
     for(int i = 1; i < BOARD_WIDTH - 1; i++)
-        if(board[BLOCK_SIZE - 1][i])
-            return true;
-    return false;
+        if(board[BLOCK_SIZE - 2][i]) {
+            boardIsFull = true;
+            break;
+        }
 }
 
 void Board::move(int x, int y) {
@@ -121,4 +123,8 @@ void Board::updateBoardToDisplay(bool updateBlock) {
 
 Pieces & Board::getNextBlock() {
     return nextBlock;
+}
+
+bool Board::getBoardIsFull() {
+    return boardIsFull;
 }

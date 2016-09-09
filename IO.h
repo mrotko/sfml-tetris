@@ -5,7 +5,6 @@
 #include "Game.h"
 #include <string>
 #include <sstream>
-#include <iostream>
 
 #define SHAPES 9
 #define SHAPE_SIZE 20
@@ -27,6 +26,9 @@ public:
     IO(Game &game);
     void drawBoard();
     void drawText();
+    void drawPause();
+    void drawEndGame();
+    sf::Vector2i controlInGame(sf::Event &event);
 };
 
 #endif //TETRIS_IO_H

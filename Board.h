@@ -11,13 +11,14 @@
 class Board {
     int **board;
     Pieces block, nextBlock;
+    bool boardIsFull;
 public:
     int **boardToDisplay;
 
     Board();
     void deleteLine(int y);
     int checkLines();
-    bool checkEnd();
+    void checkEnd();
     void move(int x, int y);
     bool moveIsPossible(int xNext, int yNext);
     void rotateBlock();
@@ -25,6 +26,7 @@ public:
     void setBlock();
     void updateBoardToDisplay(bool updateBlock = true);
     Pieces & getNextBlock();
+    bool getBoardIsFull();
 };
 
 #endif //TETRIS_BOARD_H
