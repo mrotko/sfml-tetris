@@ -84,7 +84,28 @@ void IO::drawEndGame() {
     endGame.setPosition(position);
     window.draw(endGame);
 
-    sf::Text record("", font, 30);
+    position.y += 40;
+    sf::Text record("", font, 12);
+    record.setOutlineThickness(3);
+    record.setPosition(position);
+
+    std::ostringstream ss;
+    std::left(ss);
+
+    for(int i = 0; i < game->getHallOfFame().size(); i++) {
+
+        ss << std::setw(2) << i + 1 << " "
+           << std::setw(15) << game->getHallOfFame()[i][0].substr(0, 10) << " "
+           << std::setw(10) << game->getHallOfFame()[i][1].substr(0, 10) << " "
+           << game->getHallOfFame()[i][2];
+        record.setString(ss.str());
+
+        window.draw(record);
+
+        ss.str("");
+        position.y += 20;
+        record.setPosition(position);
+    }
 }
 
 sf::Vector2i IO::controlInGame(sf::Event &event) {
@@ -103,7 +124,6 @@ sf::Vector2i IO::controlInGame(sf::Event &event) {
             game->resume();
         else
             game->pause();
-        return sf::Vector2i(0,0);
-    }
-    else return sf::Vector2i(0,0);
+        return sf::Vector2i(0, 0);
+    } else return sf::Vector2i(0, 0);
 }

@@ -16,7 +16,7 @@ class Game {
     std::string name;
     Board board;
     int lines = 0, points = 0, level = 1;
-    std::vector <std::vector<std::string>> hallOfFame;
+    std::vector <std::vector <std::string>> hallOfFame;
 public:
     bool gamePause;
     Game(std::string name);
@@ -32,7 +32,7 @@ public:
     void loadHallOfFame();
     void saveHallOfFame();
     void updateHallOfFame();
-    std::vector <std::vector<std::string>> getHallOfFame();
+    std::vector <std::vector <std::string>> getHallOfFame();
 };
 
 #endif //TETRIS_GAME_H

@@ -5,6 +5,7 @@
 #include "Game.h"
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 #define SHAPES 9
 #define SHAPE_SIZE 20
