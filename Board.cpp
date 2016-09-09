@@ -49,7 +49,7 @@ int Board::checkLines() {
 
 void Board::checkEnd() {
     for(int i = 1; i < BOARD_WIDTH - 1; i++)
-        if(board[BLOCK_SIZE - 2][i]) {
+        if(board[BLOCK_SIZE - 1][i]) {
             boardIsFull = true;
             break;
         }

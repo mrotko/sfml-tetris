@@ -85,7 +85,6 @@ void IO::drawEndGame() {
     window.draw(endGame);
 
     sf::Text record("", font, 30);
-
 }
 
 sf::Vector2i IO::controlInGame(sf::Event &event) {
@@ -106,4 +105,5 @@ sf::Vector2i IO::controlInGame(sf::Event &event) {
             game->pause();
         return sf::Vector2i(0,0);
     }
+    else return sf::Vector2i(0,0);
 }

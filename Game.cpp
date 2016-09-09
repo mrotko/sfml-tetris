@@ -21,6 +21,7 @@ void Game::resume() {
 
 void Game::end() {
     updateHallOfFame();
+    saveHallOfFame();
 }
 
 bool Game::move(int x, int y) {
@@ -95,14 +96,14 @@ void Game::addPoints(int lines) {
 void Game::loadHallOfFame() {
     std::fstream load("hallOfFame.txt", std::ios::in);
     if(load.good()) {
-        std::string name, points, line;
+        std::string name = "", points = "", date = "", line = "";
         while(!load.eof()) {
             std::getline(load, line);
             name = line.substr(0, line.find(' '));
-            points = line.substr(line.find(' ') + 1);
-            if(name != "" && points != "") {
-                hallOfFame.push_back(name);
-                hallOfFame.push_back(points);
+            points = line.substr(line.find(' ') + 1, line.rfind(' ') - line.find(' ') - 1);
+            date = line.substr(line.rfind(' ') + 1);
+            if(name != "" && points != "" && date != "") {
+                hallOfFame.push_back({name, points, date});
             }
         }
     } else {
@@ -111,18 +112,53 @@ void Game::loadHallOfFame() {
     load.close();
 }
 
-void Game::updateHallOfFame() {
+void Game::saveHallOfFame() {
     std::fstream save("hallOfFame.txt", std::ios::out | std::ios::trunc);
+    std::ostringstream ss;
     if(save.good()) {
-        for(int i = 0; i < hallOfFame.size(); i += 2) {
-            save << hallOfFame.at(i) + " " + hallOfFame.at(i + 1) + "\n";
+        for(int i = 0; i < hallOfFame.size(); i++) {
+            ss << hallOfFame[i][1];
+            save << hallOfFame[i][0] + " " + ss.str() + " " + hallOfFame[i][2] + "\n";
+            ss.str("");
         }
     }
     save.close();
 }
 
-std::vector <std::string> Game::getHallOfFame() {
-    return std::vector <std::string>();
+void Game::updateHallOfFame() {
+    std::vector <std::string> tmp;
+    std::ostringstream ss;
+
+    ss << points;
+    tmp.push_back(name);
+    tmp.push_back(ss.str());
+    ss.str(" ");
+
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+
+    ss << std::put_time(&tm, "%d-%m-%Y");
+    tmp.push_back(ss.str());
+
+    hallOfFame.push_back(tmp);
+
+    int i = hallOfFame.size() - 1;
+    while(i > 0) {
+        if(atoi(hallOfFame[i][1].c_str()) > atoi(hallOfFame[i - 1][1].c_str())) {
+            tmp = hallOfFame[i - 1];
+            hallOfFame[i - 1] = hallOfFame[i];
+            hallOfFame[i] = tmp;
+            i--;
+        } else {
+            break;
+        }
+    }
+    while(hallOfFame.size() > 10)
+        hallOfFame.pop_back();
+}
+
+std::vector <std::vector <std::string>> Game::getHallOfFame() {
+    return hallOfFame;
 }
 
 

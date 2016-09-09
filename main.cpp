@@ -20,7 +20,8 @@ int main() {
                     game.pause();
                     break;
                 case sf::Event::GainedFocus:
-                    game.resume();
+                    if(!game.getBoard().getBoardIsFull())
+                        game.resume();
                     break;
                 case sf::Event::KeyPressed:
                     move = io.controlInGame(event);
@@ -28,6 +29,10 @@ int main() {
             }
         }
         io.time = io.clock.getElapsedTime();
+
+        io.window.clear(sf::Color(75, 75, 75));
+        io.drawBoard();
+        io.drawText();
 
         if(!game.gamePause) {
             if(move.x != 0 || move.y != 0) {
@@ -46,17 +51,16 @@ int main() {
                 io.game->move(0, 1);
             }
 
-            if(!game.getBoard().getBoardIsFull()) {
-                io.window.clear(sf::Color(75, 75, 75));
-                io.drawBoard();
-                io.drawText();
-            } else {
+            if(game.getBoard().getBoardIsFull()) {
                 game.end();
-                io.drawEndGame();
+                game.pause();
             }
         } else {
             move = sf::Vector2i(0, 0);
-            io.drawPause();
+            if(game.getBoard().getBoardIsFull())
+                io.drawEndGame();
+            else
+                io.drawPause();
         }
         io.window.display();
     }
