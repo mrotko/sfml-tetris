@@ -30,7 +30,10 @@ int main() {
                         game.getBoard().rotateBlock();
                     else if(event.key.code == sf::Keyboard::Down)
                         game.move(0, 1);
-                    else if(event.key.code == sf::Keyboard::P)
+                    else if(event.key.code == sf::Keyboard::Space) {
+                        while(game.move(0, 1));
+                        game.addPoints(0);
+                    } else if(event.key.code == sf::Keyboard::P)
                         game.pause();
                     else if(event.key.code == sf::Keyboard::R)
                         game.resume();
@@ -39,16 +42,19 @@ int main() {
         }
 
         io.time = io.clock.getElapsedTime();
-        if(io.time.asMilliseconds() > HOLD_TIME) {
+        if(io.time.asMilliseconds() > HOLD_TIME - (game.getLevel() * ACCELERATION)) {
             io.clock.restart();
-            if(io.game->move(0, 1) == FALSE) {
-                std::cout << "Koniec gry\n";
-                io.window.close();
-                //  wyswietlenie podsumowania, koniec gry
-            }
+            io.game->move(0, 1);
+//            if(io.game->move(0, 1) == FALSE) {
+//                std::cout << "Koniec gry\n";
+//                io.window.close();
+//                //  wyswietlenie podsumowania, koniec gry
+//            }
         }
-        io.window.clear();
+        io.window.clear(sf::Color(75, 75, 75));
         io.drawBoard();
+        io.drawText();
         io.window.display();
+
     }
 }

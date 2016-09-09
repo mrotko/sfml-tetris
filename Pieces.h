@@ -2,13 +2,12 @@
 #define TETRIS_PIECES_H
 
 #include <vector>
-using namespace std;
 
 #define BLOCK_SIZE 5
 class Pieces {
     int x, y;   //  left top corner
     int area[BLOCK_SIZE][BLOCK_SIZE];
-    vector <vector <int>> listOfPieces;
+    std::vector <std::vector <int>> listOfPieces;
 public:
     Pieces();
     void rotate();

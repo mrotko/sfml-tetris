@@ -3,13 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-#include <ctime>
-#include <cstdlib>
 #include <string>
+#include <sstream>
+#include <iostream>
 
 #define SHAPES 9
 #define SHAPE_SIZE 20
 #define HOLD_TIME 500
+#define ACCELERATION 20
 
 class IO {
 public:
@@ -18,10 +19,14 @@ public:
     sf::Clock clock;
     sf::Time time;
     sf::Texture tileTexture;
+    sf::Text points, lines, level;
+    sf::Font font;
+    sf::Vector2f boardPosition, nextBlockPosition, textPosition;
 
     Game *game;
     IO(Game &game);
     void drawBoard();
+    void drawText();
 };
 
 #endif //TETRIS_IO_H

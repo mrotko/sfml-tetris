@@ -16,6 +16,7 @@ Board::Board() {
         board[BOARD_HEIGHT - 1][i] = 1;
 
     randBlock(BOARD_WIDTH / 2, 0);
+    randBlock(BOARD_WIDTH / 2, 0);
     updateBoardToDisplay();
     srand(time(NULL));
 }

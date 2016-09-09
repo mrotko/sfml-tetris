@@ -43,7 +43,7 @@ void Pieces::updateBlock(int type, int rotation, int posX, int posY) {
     int value = type + 2;
     this->x = posX;
     this->y = posY;
-    vector <int> shape = listOfPieces[type];
+    std::vector <int> shape = listOfPieces[type];
 
     for(int i = 0; i < BLOCK_SIZE; i++) {
         for(int j = 0; j < BLOCK_SIZE; j++) {

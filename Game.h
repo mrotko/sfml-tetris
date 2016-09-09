@@ -4,20 +4,23 @@
 #include "Board.h"
 #include <string>
 
-using namespace std;
+#define LEVEL_SPEED 10
 
 class Game {
-    string name;
+    std::string name;
     Board board;
-    int lines;
+    int lines = 0, points = 0, level = 1;
 public:
-    Game(string name);
+    Game(std::string name);
     void pause();
     void resume();
     void end();
     bool move(int x, int y);
     Board &getBoard();
-
+    int getLines();
+    int getPoints();
+    int getLevel();
+    void addPoints(int lines);
 };
 
 #endif //TETRIS_GAME_H
