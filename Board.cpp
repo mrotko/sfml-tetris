@@ -32,7 +32,7 @@ void Board::deleteLine(int y) {
 int Board::checkLines() {
     int combo = 0;
 
-    for(int i = BOARD_HEIGHT - 2; i >= BLOCK_SIZE; i--) {
+    for(int i = 0; i < BOARD_HEIGHT - 1; i++) {
         bool remove = true;
         for(int j = 0; j < BOARD_WIDTH; j++)
             if(board[i][j] == 0)
@@ -40,9 +40,9 @@ int Board::checkLines() {
         if(remove) {
             deleteLine(i);
             combo++;
-            i++;
         }
     }
+
     updateBoardToDisplay(false);
     return combo;
 }
@@ -66,8 +66,11 @@ bool Board::moveIsPossible(int xNext, int yNext) {
     int x = block.getX() + xNext;
     int y = block.getY() + yNext;
 
-    for(int i = 0; i < BLOCK_SIZE && y + i < BOARD_HEIGHT; i++)
-        for(int j = 0; j < BLOCK_SIZE && x + j < BOARD_WIDTH; j++)
+    int max_x = x + BLOCK_SIZE > BOARD_WIDTH ? BOARD_WIDTH : x + BLOCK_SIZE;
+    int max_y = y + BLOCK_SIZE > BOARD_HEIGHT ? BOARD_HEIGHT : y + BLOCK_SIZE;
+
+    for(int i = 0; y + i < max_y; i++)
+        for(int j = 0; x + j < max_x; j++)
             if(board[y + i][x + j] && block.getValue(j, i))
                 return false;
     return true;
