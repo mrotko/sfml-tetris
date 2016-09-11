@@ -8,6 +8,8 @@ int main() {
     sf::Vector2i move;
     sf::Text text("nick: ", io.font, 30);
 
+    io.window.setFramerateLimit(60);
+
     while(io.window.isOpen()) {
         io.window.clear(sf::Color(75, 75, 75));
         sf::Event event;
